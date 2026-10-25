@@ -4,3 +4,5 @@
 기업 자료수집 → SWOT → STP → 성장 방안 → 예상 결과 흐름으로 분석하고, 그 분석 방법을 50~60초 숏폼으로 보여 줍니다.
 
 자세한 목록은 [reels/README.md](reels/README.md)에 있어요.
+
+검토 리포트: [reviews/README.md](reviews/README.md)
