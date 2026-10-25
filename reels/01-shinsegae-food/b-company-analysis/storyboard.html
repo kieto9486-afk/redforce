@@ -1,0 +1,235 @@
+<title>기업분석 6단계</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: 영수증처럼 좁은 단일 칼럼. 결론 → 근거 → 숏츠 콘티 순서로 내려가는 '역순 보고서' */
+:root{
+  --bg:#F3F4F1; --paper:#FFFFFF; --ink:#1E1B18; --muted:#6B655E; --line:#DAD7D0;
+  --mustard:#C98A00; --ketchup:#B8322A; --pickle:#4F7A3A; --soft:#F7EEDC;
+  --nbb:#C98A00; --rival:#8E8780;
+  --f-display:"Black Han Sans","Noto Sans KR",sans-serif;
+  --f-body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#151311; --paper:#1F1C19; --ink:#F1ECE4; --muted:#A79F95; --line:#38332D;
+  --mustard:#F0B429; --ketchup:#E8665C; --pickle:#8DBB72; --soft:#2B241A; --nbb:#F0B429; --rival:#6E675F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#151311; --paper:#1F1C19; --ink:#F1ECE4; --muted:#A79F95; --line:#38332D;
+  --mustard:#F0B429; --ketchup:#E8665C; --pickle:#8DBB72; --soft:#2B241A; --nbb:#F0B429; --rival:#6E675F; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 64px}
+.wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.25}
+h2{font-family:var(--f-display);font-weight:400;font-size:1.9rem;letter-spacing:-.01em}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.sec{display:flex;flex-direction:column;gap:20px}
+.sec-head{display:flex;flex-direction:column;gap:6px;border-top:2px solid var(--ink);padding-top:14px}
+.step{font-family:var(--f-mono);font-size:.8rem;color:var(--mustard);font-weight:600}
+.lead{color:var(--muted);max-width:65ch}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.src{font-size:.78rem;color:var(--muted)}
+.src a{color:var(--muted)}
+a{color:var(--ketchup)}
+
+/* hero */
+.hero{display:flex;flex-direction:column;gap:22px;padding-block:8px}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(2.3rem,7vw,3.8rem);letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--mustard)}
+.verdict{background:var(--ink);color:var(--bg);padding:22px 22px;border-radius:4px;display:flex;flex-direction:column;gap:10px}
+.verdict .eyebrow{color:var(--mustard)}
+.verdict p{font-size:1.15rem;font-weight:700;line-height:1.55}
+.ticket{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.tk{background:var(--paper);border:1px solid var(--line);padding:14px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.tk b{font-family:var(--f-mono);font-size:1.6rem;font-weight:600}
+.tk span{font-size:.85rem;color:var(--muted)}
+.tk.hot b{color:var(--ketchup)}
+
+/* charts */
+.chart{background:var(--paper);border:1px solid var(--line);padding:18px;overflow-x:auto}
+.chart svg{display:block;width:100%;min-width:520px;height:auto}
+.chart svg text{fill:var(--ink);font-family:var(--f-body);font-size:13px}
+.chart svg .v{font-family:var(--f-mono);font-weight:600}
+.chart svg .m{fill:var(--muted);font-size:11px}
+.duo{display:grid;grid-template-columns:1fr;gap:16px}
+
+/* table */
+.tbl{overflow-x:auto;background:var(--paper);border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:.78rem;color:var(--muted);font-weight:500;letter-spacing:.04em}
+td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.me td{background:var(--soft)}
+tr.me td:first-child{font-weight:700}
+
+/* brand cards */
+.brands{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.brand{background:var(--paper);border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.brand.me{border-color:var(--mustard);border-width:2px}
+.brand dl{margin:0;display:grid;grid-template-columns:4.6em 1fr;gap:4px 10px;font-size:.88rem}
+.brand dt{color:var(--muted)}
+.brand dd{margin:0}
+
+/* swot */
+.swot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;background:var(--ink);border:2px solid var(--ink)}
+.q{background:var(--paper);padding:16px;display:flex;flex-direction:column;gap:8px}
+.q h3{display:flex;gap:8px;align-items:baseline}
+.q h3 .L{font-family:var(--f-display);font-weight:400;font-size:1.6rem;line-height:1}
+.q.s .L{color:var(--pickle)} .q.w .L{color:var(--ketchup)} .q.o .L{color:var(--mustard)} .q.t .L{color:var(--muted)}
+ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:4px}
+li{font-size:.92rem}
+
+/* stp */
+.stp{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.stp > div{background:var(--paper);border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.stp .big{font-family:var(--f-display);font-size:2rem;color:var(--mustard);line-height:1}
+.pos{background:var(--soft);padding:18px;border-left:4px solid var(--mustard);display:flex;flex-direction:column;gap:6px}
+.pos p.say{font-size:1.2rem;font-weight:700}
+
+/* strategies */
+.strats{display:flex;flex-direction:column;gap:12px}
+.st{background:var(--paper);border:1px solid var(--line);padding:16px 18px;display:grid;grid-template-columns:2.4rem 1fr;gap:4px 14px}
+.st .k{font-family:var(--f-display);font-size:1.8rem;color:var(--mustard);line-height:1.1;grid-row:span 3}
+.st .why{font-size:.88rem;color:var(--muted)}
+.st .kpi{font-size:.85rem;font-family:var(--f-mono);color:var(--pickle)}
+
+/* storyboard */
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.card{display:flex;flex-direction:column;gap:8px;min-width:0}
+.frame{aspect-ratio:9/16;max-width:100%;background:var(--ink);color:var(--bg);border-radius:10px;padding:16px 14px;display:flex;flex-direction:column;justify-content:center;gap:8px;position:relative;overflow:hidden}
+.frame .t{position:absolute;top:10px;left:12px;font-family:var(--f-mono);font-size:.7rem;color:var(--mustard)}
+.frame .tag{position:absolute;top:10px;right:12px;font-size:.68rem;padding:1px 7px;border-radius:99px;border:1px solid var(--mustard);color:var(--mustard)}
+.frame .scr{font-family:var(--f-display);font-size:1.35rem;line-height:1.25;text-wrap:balance}
+.frame .scr em{font-style:normal;color:var(--mustard)}
+.frame .sub{font-size:.78rem;opacity:.75}
+.frame.end{background:var(--mustard);color:#1E1B18}
+.frame.end .t,.frame.end .tag{color:#1E1B18;border-color:#1E1B18}
+.frame.end .scr em{color:var(--paper)}
+.card .na{font-size:.85rem}
+.card .dir{font-size:.78rem;color:var(--muted)}
+.copybox{background:var(--paper);border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:10px}
+.copybox pre{margin:0;white-space:pre-wrap;font-family:var(--f-body);font-size:.9rem;line-height:1.7}
+button{font:inherit;font-size:.85rem;padding:6px 12px;border:1px solid var(--ink);background:transparent;color:var(--ink);border-radius:4px;cursor:pointer;align-self:flex-start}
+button:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+.hooks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.hooks div{background:var(--paper);border:1px dashed var(--mustard);padding:12px 14px;font-weight:700;min-width:0}
+.hooks small{display:block;font-weight:400;color:var(--muted);font-size:.8rem}
+.note{font-size:.85rem;color:var(--muted);background:var(--paper);border:1px solid var(--line);padding:12px 14px}
+ol.srcs{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:4px;font-size:.85rem}
+ol.srcs a{word-break:break-all}
+/* covers: 참고 표지처럼 어두운 사진 + 흰색 굵은 2줄 + 둘째 줄 밑줄 */
+.covers{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.cv{display:flex;flex-direction:column;gap:8px;min-width:0}
+.cover{aspect-ratio:4/5;max-width:100%;border-radius:8px;position:relative;overflow:hidden;color:#FFFFFF;display:flex;flex-direction:column;justify-content:flex-end;padding:18px 16px 26px;
+  background:radial-gradient(120% 70% at 78% 22%,rgba(255,176,64,.38),transparent 55%),radial-gradient(90% 60% at 10% 90%,rgba(0,0,0,.85),transparent 70%),linear-gradient(170deg,#3A2E24 0%,#1B1612 55%,#0C0A08 100%)}
+.cover.b{background:radial-gradient(110% 60% at 30% 25%,rgba(214,64,48,.35),transparent 60%),linear-gradient(180deg,#2A2320 0%,#121010 60%,#080707 100%)}
+.cover.c{background:radial-gradient(100% 60% at 70% 30%,rgba(240,200,80,.30),transparent 60%),linear-gradient(185deg,#2D2A22 0%,#151410 60%,#090807 100%)}
+.cover .ghost{position:absolute;top:8%;right:-4%;font-family:var(--f-display);font-size:6.5rem;line-height:1;color:rgba(255,255,255,.08);letter-spacing:-.04em}
+.cover .pg{position:absolute;top:12px;right:12px;font-size:.72rem;background:rgba(0,0,0,.45);padding:2px 9px;border-radius:99px}
+.cover .ttl{font-family:var(--f-body);font-weight:900;font-size:clamp(1.3rem,4.6vw,1.6rem);line-height:1.3;letter-spacing:-.03em;text-shadow:0 2px 12px rgba(0,0,0,.6);display:flex;flex-direction:column}
+.cover .ttl u{text-decoration:none;border-bottom:3px solid #FFFFFF;padding-bottom:4px;align-self:flex-start}
+.cover .ttl b{color:#FFC233;font-weight:900}
+.cover-img{display:block;width:100%;height:auto;max-width:100%;border-radius:8px}
+.cv .dir{font-size:.8rem;color:var(--muted)}
+.cv .pick{font-size:.75rem;font-family:var(--f-mono);color:var(--mustard);font-weight:600}
+
+/* action plan */
+.plan{background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column}
+.plan > div{display:grid;grid-template-columns:6.5em 1fr;gap:4px 14px;padding:10px 16px;border-bottom:1px solid var(--line);font-size:.9rem}
+.plan > div:last-child{border-bottom:0}
+.plan dt,.plan .h{color:var(--muted);font-size:.8rem;padding-top:2px}
+.calc{font-family:var(--f-mono);font-size:.85rem;background:var(--soft);padding:8px 10px;border-radius:4px}
+.roadmap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.roadmap > div{background:var(--paper);border-top:3px solid var(--mustard);padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.roadmap .when{font-family:var(--f-mono);font-size:.8rem;color:var(--mustard);font-weight:600}
+@media (max-width:520px){.swot{grid-template-columns:1fr}h2{font-size:1.6rem}}
+@media (prefers-reduced-motion:no-preference){.verdict{animation:rise .5s ease-out both}@keyframes rise{from{transform:translateY(8px)}to{transform:none}}}
+</style>
+<style>
+.thumb{width:120px;height:auto;border-radius:6px;display:block}
+.covers img{width:100%;height:auto;border-radius:8px;display:block}
+.cv.sel{outline:3px solid var(--mustard);outline-offset:4px;border-radius:8px}
+video{width:100%;max-width:360px;height:auto;border-radius:10px;background:#000;display:block}
+.vid{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start}
+.vid > div{flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:10px}
+td img{max-width:120px}
+</style>
+<div class="wrap">
+<header class="hero">
+  <p class="eyebrow">기업분석 마케터 · 기업분석 하는 법 · 예시: 신세계푸드 vs SPC삼립 · CJ제일제당</p>
+  <h1>대기업 분석, <em>6단계</em>면 끝난다<br>신세계푸드로 따라 해보기</h1>
+  <div class="verdict"><p class="eyebrow">분석 결과 미리보기</p><p>신세계푸드의 다음 성장 열쇠는 그룹 밖 판로다. 매출의 44.4%가 이마트·스타벅스 등 그룹사 거래이고, CJ는 해외로, SPC삼립은 수출로 판로를 넓히고 있다.</p></div>
+  <div class="ticket">
+    <div class="tk"><b>1조 2,332억</b><span>신세계푸드 2025 매출</span></div>
+    <div class="tk"><b>0.4%</b><span>영업이익률 (48억)</span></div>
+    <div class="tk"><b>44.4%</b><span>그룹사(특수관계자) 매출 비중</span></div>
+    <div class="tk"><b>51.4%</b><span>CJ제일제당 식품 해외 매출 비중</span></div>
+  </div>
+  <p class="src">콘셉트: 시청자에게 기업분석 방법(자료수집 → 비교 → SWOT → STP → 전략 → 예상결과)을 알려주고, 각 단계를 신세계푸드 실제 분석으로 보여줍니다. 버거 시장만 본 분석은 <a href="https://claude.ai/artifact/HSCKQsNs4kcyXc4qB5XAcv">노브랜드 버거 편</a>에 있습니다.</p>
+</header>
+
+<section class="sec" id="cover">
+  <div class="sec-head"><span class="step">표지 선정 · 4:5 · 1080×1350</span><h2>배우고 싶게 만드는 표지</h2></div>
+  <p class="lead">기업을 비판하는 문구 대신, 시청자가 얻어갈 것(분석법)을 첫 줄에, 실전 예시(신세계푸드)를 둘째 줄에 넣었습니다.</p>
+  <div class="covers">
+    <div class="cv sel"><img src="cover_ca.png" width="1080" height="1350" alt="표지 A안"><p class="pick">✓ 선정 · A안</p><p class="dir">"대기업 분석, 6단계면 끝난다 / 신세계푸드로 따라 해보기". 단계가 보이는 배경이라 저장하고 싶게 만듭니다.</p></div>
+    <div class="cv"><img src="cover_cb.png" width="1080" height="1350" alt="표지 B안"><p class="pick">B안</p><p class="dir">"취준생을 위한 기업분석법 / 신세계푸드 실전 예시". 타깃을 이름으로 부르는 안.</p></div>
+    <div class="cv"><img src="cover_cc.png" width="1080" height="1350" alt="표지 C안"><p class="pick">C안</p><p class="dir">"숫자 3개로 기업 읽는 법 / 신세계푸드 편". 시리즈 표지로 쓰기 좋음.</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-head"><span class="step">비교 분석</span><h2>같은 식품회사, 다른 탈출구</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>회사</th><th>2025 매출</th><th>영업이익</th><th>이익률</th><th>돈 버는 방향</th><th>약점</th></tr></thead>
+    <tbody>
+      <tr class="me"><td>신세계푸드</td><td class="n">1조 2,332억</td><td class="n">48억</td><td class="n">0.4%</td><td>이마트·스타벅스 납품, 베이커리, 노브랜드 버거</td><td>그룹사 매출 44.4%</td></tr>
+      <tr><td>SPC삼립</td><td class="n">3조 3,705억</td><td class="n">387억</td><td class="n">1.1%</td><td>베이커리(이익률 4%), 코스트코·수출 확대</td><td>식자재 유통 GFS가 매출 51%인데 이익률 0.1%, 시화공장 사고</td></tr>
+      <tr><td>CJ제일제당 (식품부문)</td><td class="n">11조 5,221억</td><td class="n">5,255억</td><td class="n">4.6%</td><td>비비고 해외, 해외 매출 51.4%</td><td>국내 식품 매출 감소(4분기 −3.8%)</td></tr>
+    </tbody></table></div>
+  <div class="swot">
+    <div class="q s"><h3><span class="L">S</span>강점</h3><ul><li>이마트·스타벅스라는 확실한 판로</li><li>인천 베이커리 공장 이전으로 생산능력 약 4배</li><li>급식 매각으로 약 1,200억 현금</li></ul></div>
+    <div class="q w"><h3><span class="L">W</span>약점</h3><ul><li>그룹사 매출 44.4%, 바깥 경쟁력 검증 부족</li><li>영업이익률 0.4%</li><li>해외 매출 공개 수치 없음</li></ul></div>
+    <div class="q o"><h3><span class="L">O</span>기회</h3><ul><li>K-베이커리·K-푸드 수출 수요</li><li>이마트 100% 편입으로 그룹 투자 집중</li><li>베이커리 매출 목표 5,700억(전체의 약 45%)</li></ul></div>
+    <div class="q t"><h3><span class="L">T</span>위협</h3><ul><li>SPC삼립과 코스트코·수출 시장 정면 경쟁</li><li>원재료·환율 부담</li><li>그룹사 실적이 흔들리면 같이 흔들리는 구조</li></ul></div>
+  </div>
+  <div class="pos"><span class="eyebrow">STP 한 줄</span><p class="say">타깃은 그룹 밖 유통사와 해외 바이어, 포지셔닝은 "스타벅스가 검증한 빵 공장".</p></div>
+  <div class="strats">
+    <div class="st"><span class="k">1</span><h3>인천 공장 물량을 그룹 밖·해외로</h3><p>늘어나는 생산능력을 편의점·창고형 마트 납품과 냉동 빵 수출에 배정합니다.</p><p class="kpi">목표 · 그룹사 매출 비중 44% → 35%</p></div>
+    <div class="st"><span class="k">2</span><h3>남의 PB 말고 내 브랜드로</h3><p>자체 브랜드 '올반'과 베이커리 브랜드 비중을 키워 납품 단가 협상력을 확보합니다.</p><p class="kpi">목표 · 자체 브랜드 매출 비중 측정·공개</p></div>
+    <div class="st"><span class="k">3</span><h3>노브랜드 버거로 현금 확보</h3><p>콤팩트 가맹 월 10개 출점으로 투자 없이 현금 흐름을 만듭니다.</p><p class="kpi">목표 · 2028년 매장 500개 이상</p></div>
+  </div>
+  <p class="note">예상결과 계산: 2026 베이커리 매출 목표 5,700억 × SPC삼립 베이커리 이익률 4% = 영업이익 228억. 2025년 회사 전체 영업이익 48억의 약 4.7배입니다. 목표와 타사 이익률을 곱한 가정이며 예측이 아닙니다.</p>
+</section>
+
+<section class="sec">
+  <div class="sec-head"><span class="step">숏츠 · 9:16 · 80초 · 10장면</span><h2>대본과 영상</h2></div>
+  <div class="vid">
+    <video src="how_to_analyze_shinsegae_food.mp4" controls playsinline muted poster="scenes/scene_01.png"></video>
+    <div>
+      <h3>내레이션 넣는 법</h3>
+      <p>잔잔한 남성 목소리는 CapCut(캡컷)의 텍스트 읽기 기능으로 넣는 게 가장 빠릅니다. 영상과 자막 파일(narration.srt)을 불러온 뒤 자막 전체를 선택하고 <b>텍스트 읽기</b>에서 차분한 한국어 남성 음성을 고르면, 장면 타이밍에 맞춰 읽어 줍니다.</p>
+      <p class="src">속도는 0.9배 정도가 '누가 들어도 이해되는' 속도입니다. 숫자는 대본에 읽는 방식 그대로 적어 두었습니다.</p>
+    </div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>시간</th><th>장면</th><th>내레이션</th></tr></thead>
+    <tbody><tr><td class="n">0.0~6.0s</td><td><img src="scenes/scene_01.png" alt="장면 1" width="1080" height="1920" class="thumb"></td><td><b>훅 · 무엇을 배우나</b><br>대기업 분석, 어렵게 느껴지시죠. 오늘은 신세계푸드를 예시로, 여섯 단계 만에 분석을 끝내 보겠습니다.</td></tr><tr><td class="n">6.0~13.0s</td><td><img src="scenes/scene_02.png" alt="장면 2" width="1080" height="1920" class="thumb"></td><td><b>결과 미리보기</b><br>결과부터 보여드릴게요. 신세계푸드의 다음 성장 열쇠는 그룹 밖 판로였습니다. 이 결론이 어떻게 나왔는지 순서대로 볼게요.</td></tr><tr><td class="n">13.0~23.0s</td><td><img src="scenes/scene_03.png" alt="장면 3" width="1080" height="1920" class="thumb"></td><td><b>STEP 1 자료수집</b><br>1단계, 자료수집. 공시에서 매출, 영업이익, 주요 거래처 세 가지만 먼저 봅니다. 신세계푸드는 매출 1조 2천억 원, 이익률 0.4%, 매출의 44%가 같은 그룹 회사와의 거래였습니다.</td></tr><tr><td class="n">23.0~31.5s</td><td><img src="scenes/scene_04.png" alt="장면 4" width="1080" height="1920" class="thumb"></td><td><b>STEP 2 비교</b><br>2단계, 비교. 비슷한 회사와 나란히 놓으면 숫자의 의미가 보입니다. CJ제일제당 식품 부문은 4.6%, SPC삼립은 1.1%, 신세계푸드는 0.4%였습니다.</td></tr><tr><td class="n">31.5~40.0s</td><td><img src="scenes/scene_05.png" alt="장면 5" width="1080" height="1920" class="thumb"></td><td><b>STEP 2 차이 찾기</b><br>그다음 숫자 뒤의 차이를 찾습니다. CJ는 해외 매출이 절반을 넘었고, SPC삼립은 수출을 넓히고 있었습니다. 신세계푸드는 그룹 안 거래가 중심이었죠.</td></tr><tr><td class="n">40.0~49.0s</td><td><img src="scenes/scene_06.png" alt="장면 6" width="1080" height="1920" class="thumb"></td><td><b>STEP 3 SWOT</b><br>3단계, SWOT. 강점은 안정적인 그룹 판로와 네 배로 커지는 인천 빵 공장, 약점은 낮은 이익률입니다. 기회는 케이 베이커리 수출, 위협은 원재료 가격입니다.</td></tr><tr><td class="n">49.0~57.5s</td><td><img src="scenes/scene_07.png" alt="장면 7" width="1080" height="1920" class="thumb"></td><td><b>STEP 4 STP</b><br>4단계, STP. 누구에게 팔지 다시 정합니다. 그룹 밖 유통사와 해외 바이어를 타깃으로, 스타벅스와 이마트가 검증한 빵 공장이라는 자리를 잡는 겁니다.</td></tr><tr><td class="n">57.5~66.0s</td><td><img src="scenes/scene_08.png" alt="장면 8" width="1080" height="1920" class="thumb"></td><td><b>STEP 5 전략</b><br>5단계, 성장 전략. 늘어난 공장 물량을 그룹 밖과 해외로 팔고, 자체 브랜드를 키우고, 노브랜드 버거 가맹을 넓히는 세 가지로 정리했습니다.</td></tr><tr><td class="n">66.0~73.5s</td><td><img src="scenes/scene_09.png" alt="장면 9" width="1080" height="1920" class="thumb"></td><td><b>STEP 6 예상결과</b><br>6단계, 예상 결과. 베이커리 매출 목표 5천7백억 원에서 SPC삼립 수준인 4%를 남기면, 영업이익은 지금의 네 배가 넘습니다.</td></tr><tr><td class="n">73.5~80.5s</td><td><img src="scenes/scene_10.png" alt="장면 10" width="1080" height="1920" class="thumb"></td><td><b>정리 · CTA</b><br>자료수집, 비교, SWOT, STP, 전략, 예상 결과. 이 여섯 단계만 기억하세요. 다음에 분석할 기업은 댓글로 추천해 주세요.</td></tr></tbody></table></div>
+</section>
+
+<section class="sec">
+  <div class="sec-head"><span class="step">출처</span><h2>숫자의 근거</h2></div>
+  <ol class="srcs">
+    <li>신세계푸드 2025 실적: <a href="https://www.asiatoday.co.kr/kn/view.php?key=20260211010004303">아시아투데이 2026.2.11</a></li>
+    <li>이마트 100% 자회사 편입·베이커리 목표 5,700억: <a href="https://m.ceoscoredaily.com/page/view/2026072116502733661">CEO스코어데일리 2026.7.22</a></li>
+    <li>특수관계자 매출 44.4%·인천 공장 4배: <a href="https://v.daum.net/v/20260724170905789">뉴스웨이 2026.7.24</a></li>
+    <li>SPC삼립 2025 실적: <a href="https://www.mt.co.kr/living/2026/02/09/2026020918051393768">머니투데이 2026.2.9</a></li>
+    <li>SPC삼립 사업 구조·2030 목표: <a href="https://www.huffingtonpost.kr/article/260960">허프포스트코리아 2026.10.2</a></li>
+    <li>SPC삼립 이익률·시화공장: <a href="https://newstomato.com/ReadNews.aspx?no=1304472">뉴스토마토 2026.6.18</a></li>
+    <li>CJ제일제당 2025 실적: <a href="https://www.sidae.com/article/2026020917092925341">시대 2026.2.9</a></li>
+  </ol>
+</section>
+</div>
