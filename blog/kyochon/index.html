@@ -59,8 +59,8 @@ ul.tips li::before{content:"✔";position:absolute;left:0;color:var(--gold);font
 </style>
 
 <div class="toolbar">
-  <span>네이버 블로그 붙여넣기용 미리보기</span>
-  <button type="button" id="copyBtn">본문 텍스트 복사</button>
+  <span>티스토리: HTML 모드에 붙여넣고, 점선 칸마다 사진 업로드</span>
+  <span style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" id="tistoryBtn">티스토리 HTML 복사</button><button type="button" id="copyBtn">본문 텍스트 복사</button></span>
 </div>
 
 <article class="post" id="post">
@@ -161,6 +161,79 @@ ul.tips li::before{content:"✔";position:absolute;left:0;color:var(--gold);font
 
 <p class="src toolbar">출처: 교촌앱 화면(2026.10) · <a href="https://zdnet.co.kr/view/?no=20260203112434">교촌 포장 10% 할인(ZDNet, 2026.2)</a> · <a href="https://zdnet.co.kr/view/?no=20261020174452">K-스피커스 13기(ZDNet, 2026.10)</a></p>
 
+<script type="text/plain" id="tistoryHtml"><!-- 제목: 아직도 치킨 배달시켜요? 교촌 포장하면 8,600원 아껴요｜교촌앱 포장 10% 할인 후기 -->
+<div style="font-size:16px;line-height:1.85;color:#221d16">
+<p style="border:2px dashed #b8862b;background:#f6ecd6;border-radius:8px;padding:22px 12px;text-align:center;font-weight:700;color:#221d16">📷 여기에 01_thumbnail.jpg (대표 이미지로도 지정) 업로드 후 이 칸 삭제</p>
+<p style="font-size:24px;font-weight:900;line-height:1.5;margin:0 0 18px">치킨 시키는데<br/>배달비만 <span style="color:#c8211b">4,000원?</span> 😇</p>
+<p>솔직히 요즘 치킨 시킬 때마다 결제 화면에서 한 번씩 멈칫하게 되잖아요. 치킨값도 만만치 않은데 배달비까지 붙으면 "이 돈이면…" 소리가 절로 나오더라고요.</p>
+<p>그런데 혹시 알고 계셨나요? <span style="background:linear-gradient(transparent 58%,#f6ecd6 58%);font-weight:700">교촌치킨 앱에서 '포장'만 누르면 배달비는 0원, 거기에 10% 할인 쿠폰까지</span> 적용된다는 사실! 🍗</p>
+<p>똑같은 치킨을 <b>50,000원 대신 41,400원</b>, 무려 <b>8,600원</b> 아껴서 먹는 방법! 제가 직접 앱 화면을 하나하나 캡처해서 처음부터 끝까지 정리해봤어요.</p>
+<p><b>👉 3분이면 누구나 따라 할 수 있으니까, 끝까지 읽고 오늘 저녁 치킨값 아껴가세요!</b></p>
+<h2 style="border-bottom:2px solid #b8862b;padding-bottom:8px;margin-top:44px">🤔 배달 vs 포장, 계산해보니 차이가 이 정도?</h2>
+<p>먼저 숫자로 비교해볼게요. 제 장바구니에 담은 <b>허니갈릭윙박스 20PCS 2개(46,000원)</b> 기준이에요.</p>
+<div style="overflow-x:auto;margin:16px 0"><table style="width:100%;border-collapse:collapse;font-size:15px">
+<thead><tr><th style="padding:9px 10px;border-bottom:1px solid #e6dccb;background:#f6ecd6;text-align:left">구분</th><th style="padding:9px 10px;border-bottom:1px solid #e6dccb;background:#f6ecd6;text-align:left">교촌앱 배달</th><th style="padding:9px 10px;border-bottom:1px solid #e6dccb;background:#f6ecd6;text-align:left">교촌앱 포장</th></tr></thead>
+<tbody>
+<tr><td style="padding:9px 10px;border-bottom:1px solid #e6dccb">메뉴 가격</td><td style="text-align:right;padding:9px 10px;border-bottom:1px solid #e6dccb">46,000원</td><td style="text-align:right;padding:9px 10px;border-bottom:1px solid #e6dccb">46,000원</td></tr>
+<tr><td style="padding:9px 10px;border-bottom:1px solid #e6dccb">배달비</td><td style="text-align:right;padding:9px 10px;border-bottom:1px solid #e6dccb">4,000원</td><td style="text-align:right;padding:9px 10px;border-bottom:1px solid #e6dccb"><b>0원</b></td></tr>
+<tr><td style="padding:9px 10px;border-bottom:1px solid #e6dccb">포장 할인</td><td style="text-align:right;padding:9px 10px;border-bottom:1px solid #e6dccb">없음</td><td style="text-align:right;color:#c8211b;padding:9px 10px;border-bottom:1px solid #e6dccb"><b>-4,600원</b></td></tr>
+<tr style="font-weight:900"><td style="padding:9px 10px;border-bottom:1px solid #e6dccb">최종 결제</td><td style="text-align:right;padding:9px 10px;border-bottom:1px solid #e6dccb">50,000원</td><td style="text-align:right;color:#c8211b;padding:9px 10px;border-bottom:1px solid #e6dccb">41,400원</td></tr>
+</tbody></table></div>
+<p>같은 치킨인데 <span style="background:linear-gradient(transparent 58%,#f6ecd6 58%);font-weight:700">무려 8,600원 차이</span>! 😳 배달비 4,000원이 빠지고, 10% 할인 4,600원이 더 빠지니까 차이가 꽤 크죠. 많이 시킬수록 할인 금액도 커져서, 이렇게 한 달에 네 번만 포장으로 바꿔도 <b>34,400원</b>이 그대로 남는 셈이에요.</p>
+<p style="font-size:13px;color:#6f6556">※ 제가 사는 동네(경기 화성 봉담1호점) 교촌앱 화면 기준이에요(2026.10.27). 배달비는 매장마다 다를 수 있어요.</p>
+<p style="border:2px dashed #b8862b;background:#f6ecd6;border-radius:8px;padding:22px 12px;text-align:center;font-weight:700;color:#221d16">📷 여기에 02_compare.jpg 업로드 후 이 칸 삭제</p>
+<h2 style="border-bottom:2px solid #b8862b;padding-bottom:8px;margin-top:44px">📱 할인 받는 법, 진짜 이게 끝이에요</h2>
+<p>"앱 주문 복잡하지 않아?" 하실 수 있는데, 전혀요! 제가 직접 캡처한 화면에 눌러야 할 곳을 빨간 박스로 표시해뒀으니 그대로 따라 하시면 됩니다.</p>
+<h3>STEP 1. 교촌치킨 앱 실행 → 하단 '주문' 버튼</h3>
+<p>교촌치킨 앱을 설치하고 로그인한 다음, 화면 아래 가운데 있는 <b>육각형 '주문' 버튼</b>을 눌러주세요. 포장 10% 할인은 <b>앱 회원 혜택</b>이라 로그인이 꼭 필요해요.</p>
+<p style="border:2px dashed #b8862b;background:#f6ecd6;border-radius:8px;padding:22px 12px;text-align:center;font-weight:700;color:#221d16">📷 여기에 03_step1_app_home.jpg 업로드 후 이 칸 삭제</p>
+<h3>STEP 2. '배달' 말고 '포장' 선택 ⭐</h3>
+<p>여기가 제일 중요해요! 주문 버튼을 누르면 '배달'과 '포장'이 뜨는데, <span style="background:linear-gradient(transparent 58%,#f6ecd6 58%);font-weight:700">꼭 '포장'을 눌러주세요.</span></p>
+<p style="border:2px dashed #b8862b;background:#f6ecd6;border-radius:8px;padding:22px 12px;text-align:center;font-weight:700;color:#221d16">📷 여기에 04_step2_pickup.jpg 업로드 후 이 칸 삭제</p>
+<h3>STEP 3. 픽업할 매장 선택</h3>
+<p>내 위치 기준으로 가까운 매장이 떠요. 여기서 보면 <b>배달비 4,000원</b>이라고 적혀 있죠? 포장을 고르면 이 금액이 그대로 0원이 돼요. 퇴근길 동선에 있는 매장의 '포장'을 눌러주세요.</p>
+<p style="border:2px dashed #b8862b;background:#f6ecd6;border-radius:8px;padding:22px 12px;text-align:center;font-weight:700;color:#221d16">📷 여기에 05_step3_store.jpg 업로드 후 이 칸 삭제</p>
+<h3>STEP 4. 메뉴 담기</h3>
+<p>먹고 싶은 메뉴를 골라 수량을 확인하고 '장바구니 담기'를 눌러주세요. 캡처는 교촌의 근본 <b>허니콤보(23,000원)</b> 화면이고, 저는 <b>허니갈릭윙박스 20PCS(23,000원) 2개</b>를 담아서 장바구니가 46,000원이 됐어요. 😋</p>
+<p style="border:2px dashed #b8862b;background:#f6ecd6;border-radius:8px;padding:22px 12px;text-align:center;font-weight:700;color:#221d16">📷 여기에 06_step4_menu.jpg 업로드 후 이 칸 삭제</p>
+<h3>STEP 5. 결제할 때 '포장 10% 할인' 쿠폰 적용 ✅</h3>
+<p>결제 화면에서 쿠폰을 누르면 <b>'포장 10% 할인'</b> 쿠폰이 보여요. 체크하고 '선택적용'만 누르면 끝! 장바구니 46,000원에서 <b>4,600원</b>이 빠져서 <span style="background:linear-gradient(transparent 58%,#f6ecd6 58%);font-weight:700">41,400원</span>이 돼요.</p>
+<p style="border:2px dashed #b8862b;background:#f6ecd6;border-radius:8px;padding:22px 12px;text-align:center;font-weight:700;color:#221d16">📷 여기에 07_step5_coupon.jpg 업로드 후 이 칸 삭제</p>
+<p style="font-size:13px;color:#6f6556">※ 쿠폰 조건: 16,000원 이상 주문 시 사용 가능, 2026년 12월 31일까지. 단품 메뉴에만 적용되고 세트 메뉴는 제외돼요.</p>
+<h2 style="border-bottom:2px solid #b8862b;padding-bottom:8px;margin-top:44px">🍗 그래도 교촌 하면 역시 허니콤보</h2>
+<p style="border:2px dashed #b8862b;background:#f6ecd6;border-radius:8px;padding:22px 12px;text-align:center;font-weight:700;color:#221d16">📷 여기에 08_chicken.jpg 업로드 후 이 칸 삭제</p>
+<p>윙박스도 좋지만, 교촌 하면 빼놓을 수 없는 게 허니콤보죠! 박스를 여는 순간 달콤한 허니 향이 확 퍼지는데, 이 맛에 교촌 먹는 거죠. <b>허니콤보</b>는 쫄깃한 날개와 담백한 다리 조합이라 부위 고민할 필요가 없어요.</p>
+<p>겉은 바삭하고, 달콤짭짤한 허니소스가 얇게 코팅돼 있어서 한 입 베어 물면 <span style="background:linear-gradient(transparent 58%,#f6ecd6 58%);font-weight:700">'바삭' 소리부터 달라요.</span> 소스가 과하지 않아서 끝까지 물리지 않고, 단짠 조합이라 콜라 한 모금이면 무한 루프… 🔁 포장해서 갓 튀긴 걸 바로 먹으면 이 바삭함이 훨씬 오래가요.</p>
+<h2 style="border-bottom:2px solid #b8862b;padding-bottom:8px;margin-top:44px">🎬 글로 보기 귀찮다면? 30초 영상으로 끝내드림 👇</h2>
+<p>할인 받는 법부터 허니콤보까지 숏츠로도 담아봤어요! 영상으로 보면 바삭함이 더 실감나실 거예요 😆</p>
+<p style="border:2px dashed #b8862b;background:#f6ecd6;border-radius:8px;padding:22px 12px;text-align:center;font-weight:700;color:#221d16">📷 여기에 09_reels.mp4 (또는 인스타그램 릴스 링크) 업로드 후 이 칸 삭제</p>
+<h2 style="border-bottom:2px solid #b8862b;padding-bottom:8px;margin-top:44px">💡 알아두면 더 이득인 꿀팁</h2>
+<ul style="list-style:none;padding:0;margin:0">
+<li style="padding:6px 0">✔ <b>피크 시간(저녁 6~8시)엔 미리 주문!</b> 도착 시간에 맞춰 주문하면 대기 없이 바로 픽업 가능해요.</li>
+<li style="padding:6px 0">✔ <b>퇴근길 동선에 있는 매장을 즐겨찾기</b>해두면 다음 주문이 훨씬 빨라져요.</li>
+<li style="padding:6px 0">✔ <b>16,000원 이상 단품 주문</b>이어야 쿠폰이 적용돼요. 세트 메뉴는 제외라 단품으로 담는 게 이득!</li>
+<li style="padding:6px 0">✔ <b>결제 전 쿠폰 적용 필수!</b> 자동으로 빠지는 게 아니라 결제할 때 직접 선택해야 해요.</li>
+</ul>
+<h2 style="border-bottom:2px solid #b8862b;padding-bottom:8px;margin-top:44px">✍️ 총평</h2>
+<div style="overflow-x:auto;margin:16px 0"><table style="width:100%;border-collapse:collapse;font-size:15px">
+<tbody>
+<tr><td style="padding:9px 10px;border-bottom:1px solid #e6dccb">가격 혜택</td><td style="padding:9px 10px;border-bottom:1px solid #e6dccb">⭐⭐⭐⭐⭐ 배달비 0원 + 10% 할인</td></tr>
+<tr><td style="padding:9px 10px;border-bottom:1px solid #e6dccb">주문 편의성</td><td style="padding:9px 10px;border-bottom:1px solid #e6dccb">⭐⭐⭐⭐⭐ 3분이면 끝</td></tr>
+<tr><td style="padding:9px 10px;border-bottom:1px solid #e6dccb">맛</td><td style="padding:9px 10px;border-bottom:1px solid #e6dccb">⭐⭐⭐⭐⭐ 갓 튀긴 바삭함 그대로</td></tr>
+<tr><td style="padding:9px 10px;border-bottom:1px solid #e6dccb">재주문 의사</td><td style="padding:9px 10px;border-bottom:1px solid #e6dccb">💯 무조건</td></tr>
+</tbody></table></div>
+<p>배달비 아끼고, 할인 받고, 제일 맛있을 때 바로 먹을 수 있는 방법. 한 번 해보니까 왜 이제야 알았나 싶더라고요.</p>
+<p style="font-size:22px;font-weight:900;text-align:center;margin:28px 0 0">오늘 저녁 치킨은, 배달 말고 포장으로 10% 아끼세요! 🍗</p>
+<section style="margin-top:48px;border:2px solid #b8862b;border-radius:10px;padding:24px;background:#f6ecd6">
+<h2 style="border-bottom:2px solid #b8862b;padding-bottom:8px;margin-top:44px">📢 교촌을 사랑한다면, 여기 주목!</h2>
+<p><b>교촌치킨 공식 서포터즈 'K-스피커스' 13기 모집!</b> 🎤</p>
+<p>교촌의 신메뉴와 브랜드를 직접 경험하고, 블로그·숏폼 콘텐츠로 더 많은 사람에게 전하는 대외활동이에요. 저도 교촌을 좋아하는 마음을 콘텐츠로 표현하고 싶어서 이번 13기에 지원하게 됐어요.</p>
+<ul style="list-style:none;padding:0;margin:14px 0 0"><li style="padding:3px 0"><b style="color:#b8862b">✔ 모집 대상: </b>2030세대 · 대학(원)생 60명</li><li style="padding:3px 0"><b style="color:#b8862b">✔ 접수 마감: </b>2026년 10월 28일</li><li style="padding:3px 0"><b style="color:#b8862b">✔ 합격 발표: </b>11월 3일</li><li style="padding:3px 0"><b style="color:#b8862b">✔ 활동 기간: </b>11월 9일 ~ 2027년 1월 8일 (월 4회, 총 8회 미션)</li><li style="padding:3px 0"><b style="color:#b8862b">✔ 활동 혜택: </b>매월 교촌치킨 제품 교환권 3매, 수료증, 우수 활동자 6명 추가 혜택</li><li style="padding:3px 0"><b style="color:#b8862b">✔ 지원 방법: </b>[공식 공고 링크]</li></ul>
+<p style="border:2px dashed #b8862b;background:#f6ecd6;border-radius:8px;padding:22px 12px;text-align:center;font-weight:700;color:#221d16">📷 여기에 K-스피커스 13기 공식 모집 포스터(출처 표기) 업로드 후 이 칸 삭제</p>
+</section>
+<p style="margin-top:36px;color:#b8862b;font-size:14px">#교촌치킨 #교촌포장할인 #교촌앱 #교촌치킨할인 #치킨포장할인 #치킨할인 #포장주문 #허니콤보 #교촌K스피커스 #K스피커스13기 #교촌서포터즈</p>
+</div>
+</script>
 <script>
 document.getElementById('copyBtn').addEventListener('click', async (e) => {
   const btn = e.currentTarget;
@@ -171,5 +244,15 @@ document.getElementById('copyBtn').addEventListener('click', async (e) => {
     const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = '선택됨 · Ctrl+C로 복사';
   }
   setTimeout(() => { btn.textContent = '본문 텍스트 복사'; }, 2500);
+});
+document.getElementById('tistoryBtn').addEventListener('click', async (e) => {
+  const btn = e.currentTarget;
+  const html = document.getElementById('tistoryHtml').textContent;
+  try { await navigator.clipboard.writeText(html); btn.textContent = '복사됨 · HTML 모드에 붙여넣기'; }
+  catch (_) {
+    const ta = document.createElement('textarea'); ta.value = html; ta.id = 'tistoryFallback';
+    ta.style.cssText = 'width:100%;height:160px;margin-top:8px'; btn.after(ta); ta.select(); btn.textContent = '선택됨 · Ctrl+C로 복사';
+  }
+  setTimeout(() => { btn.textContent = '티스토리 HTML 복사'; }, 3000);
 });
 </script>
