@@ -32,6 +32,7 @@ b,strong{font-weight:700}
 .red{color:var(--red)}
 figure{margin:22px 0}
 figure img{display:block;width:100%;max-width:100%;border-radius:8px}
+figure.shot img{width:min(100%,360px);margin:0 auto;border:1px solid var(--line)}
 figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:6px}
 .slot{border:2px dashed var(--line);background:var(--slot);border-radius:8px;padding:28px 16px;text-align:center;color:var(--muted);font-size:14px}
 .slot b{display:block;color:var(--fg);font-size:15px;margin-bottom:2px}
@@ -57,7 +58,7 @@ ul.tips li::before{content:"✔";position:absolute;left:0;color:var(--gold);font
 </style>
 
 <div class="toolbar">
-  <span>네이버 블로그 붙여넣기용 미리보기 · 점선 칸은 직접 찍은 사진 자리</span>
+  <span>네이버 블로그 붙여넣기용 미리보기</span>
   <button type="button" id="copyBtn">본문 텍스트 복사</button>
 </div>
 
@@ -67,85 +68,76 @@ ul.tips li::before{content:"✔";position:absolute;left:0;color:var(--gold);font
 
 <figure><img src="images/thumbnail.jpg" alt="포장하면 10% 할인 썸네일"></figure>
 
-<p class="hook">배달앱에선 허니콤보 26,000원,<br>배달팁까지 붙으면 <span class="red">29,000원?</span> 😇</p>
-<p>솔직히 요즘 치킨 시킬 때마다 결제 화면에서 한 번씩 멈칫하게 되잖아요. 치킨값도 오르는데 배달팁까지 붙으면 "이 돈이면…" 소리가 절로 나오더라고요.</p>
-<p>그런데 혹시 알고 계셨나요? <span class="hl">교촌치킨 앱에서 '포장'만 누르면 배달팁은 0원, 거기에 10% 할인 쿠폰이 횟수 제한 없이</span> 적용된다는 사실! 🍗</p>
-<p>같은 허니콤보를 <b>20,700원</b>에 먹을 수 있는 방법, 오늘 직접 앱으로 주문하고 픽업까지 다녀온 후기로 처음부터 끝까지 정리해봤어요.</p>
+<p class="hook">치킨 한 마리 시키는데<br>배달비만 <span class="red">4,000원?</span> 😇</p>
+<p>솔직히 요즘 치킨 시킬 때마다 결제 화면에서 한 번씩 멈칫하게 되잖아요. 치킨값도 만만치 않은데 배달비까지 붙으면 "이 돈이면…" 소리가 절로 나오더라고요.</p>
+<p>그런데 혹시 알고 계셨나요? <span class="hl">교촌치킨 앱에서 '포장'만 누르면 배달비는 0원, 거기에 10% 할인 쿠폰까지</span> 적용된다는 사실! 🍗</p>
+<p>같은 허니콤보를 <b>27,000원 대신 20,700원</b>에 먹을 수 있는 방법, 제가 직접 앱 화면을 하나하나 캡처해서 처음부터 끝까지 정리해봤어요.</p>
 <p><b>👉 3분이면 누구나 따라 할 수 있으니까, 끝까지 읽고 오늘 저녁 치킨값 아껴가세요!</b></p>
-<div class="slot"><b>📸 배달앱 주문 화면 캡처</b>가격·배달팁에 빨간 동그라미</div>
 
 <h2>🤔 배달 vs 포장, 계산해보니 차이가 이 정도?</h2>
-<p>먼저 숫자로 비교해볼게요. 교촌 대표 메뉴 <b>허니콤보</b> 기준이에요.</p>
+<p>먼저 숫자로 비교해볼게요. 교촌 대표 메뉴 <b>허니콤보</b>를 교촌앱에서 주문한다고 했을 때예요.</p>
 <div class="tbl"><table>
-<thead><tr><th>구분</th><th>배달앱 주문</th><th>교촌앱 포장</th></tr></thead>
+<thead><tr><th>구분</th><th>교촌앱 배달</th><th>교촌앱 포장</th></tr></thead>
 <tbody>
-<tr><td>메뉴 가격</td><td class="num">26,000원</td><td class="num">23,000원</td></tr>
-<tr><td>배달팁</td><td class="num">3,000원 (예시)</td><td class="num"><b>0원</b></td></tr>
+<tr><td>메뉴 가격</td><td class="num">23,000원</td><td class="num">23,000원</td></tr>
+<tr><td>배달비</td><td class="num">4,000원</td><td class="num"><b>0원</b></td></tr>
 <tr><td>포장 할인</td><td class="num">없음</td><td class="num red"><b>-2,300원</b></td></tr>
-<tr class="total"><td>최종 결제</td><td class="num">29,000원</td><td class="num red">20,700원</td></tr>
+<tr class="total"><td>최종 결제</td><td class="num">27,000원</td><td class="num red">20,700원</td></tr>
 </tbody></table></div>
-<p>같은 치킨인데 <span class="hl">무려 8,300원 차이</span>! 😳 서울 지역 상당수 매장은 배달앱 가격이 26,000원이지만, 매장·교촌앱 포장 가격은 권장가 23,000원 그대로거든요. 여기에 10% 할인까지 더해지니 차이가 커질 수밖에요. 한 달에 네 번만 포장으로 바꿔도 <b>33,200원</b>이 그대로 남는 셈이에요.</p>
-<p class="note">※ 배달팁은 매장·거리마다 달라서 3,000원으로 예를 들었어요. 배달앱 가격도 지역·매장마다 다를 수 있어요.</p>
-<figure><img src="images/compare.jpg" alt="배달 vs 포장 비교표: 29,000원 대 20,700원"></figure>
+<p>같은 치킨인데 <span class="hl">무려 6,300원 차이</span>! 😳 배달비 4,000원이 빠지고, 10% 할인 2,300원이 더 빠지니까 차이가 꽤 크죠. 한 달에 네 번만 포장으로 바꿔도 <b>25,200원</b>이 그대로 남는 셈이에요. 치킨 한 마리 값이 더 생기는 거죠!</p>
+<p class="note">※ 제가 사는 동네(경기 화성 봉담) 매장의 교촌앱 화면 기준이에요. 배달비는 매장마다 다를 수 있어요.</p>
+<figure><img src="images/compare.jpg" alt="배달 vs 포장 비교표: 27,000원 대 20,700원"></figure>
 
 <h2>📱 할인 받는 법, 진짜 이게 끝이에요</h2>
-<p>"앱 주문 복잡하지 않아?" 하실 수 있는데, 전혀요! 캡처 화면에 순서대로 표시해뒀으니 그대로 따라 하시면 됩니다.</p>
+<p>"앱 주문 복잡하지 않아?" 하실 수 있는데, 전혀요! 제가 직접 캡처한 화면에 눌러야 할 곳을 빨간 박스로 표시해뒀으니 그대로 따라 하시면 됩니다.</p>
 
-<h3>STEP 1. 교촌치킨 앱 설치 &amp; 로그인</h3>
-<p>앱스토어나 플레이스토어에서 <b>'교촌치킨'</b> 검색 후 설치하고 회원가입해주세요. 포장 10% 할인은 <b>앱 회원 전용 혜택</b>이라 로그인이 꼭 필요해요.</p>
-<div class="slot"><b>📸 앱 메인 화면</b></div>
+<h3>STEP 1. 교촌치킨 앱 실행 → 하단 '주문' 버튼</h3>
+<p>교촌치킨 앱을 설치하고 로그인한 다음, 화면 아래 가운데 있는 <b>육각형 '주문' 버튼</b>을 눌러주세요. 포장 10% 할인은 <b>앱 회원 혜택</b>이라 로그인이 꼭 필요해요.</p>
+<figure class="shot"><img src="images/steps/step1_app_home.jpg" alt="교촌앱 홈 화면, 하단 주문 버튼 강조"></figure>
 
-<h3>STEP 2. 주문 방식에서 '포장' 선택 ⭐</h3>
-<p>여기가 제일 중요해요! 메인 화면에서 <span class="hl">'배달'이 아니라 '포장'</span>을 꼭 눌러주세요.</p>
-<div class="slot"><b>📸 포장 버튼</b>빨간 박스로 강조</div>
+<h3>STEP 2. '배달' 말고 '포장' 선택 ⭐</h3>
+<p>여기가 제일 중요해요! 주문 버튼을 누르면 '배달'과 '포장'이 뜨는데, <span class="hl">꼭 '포장'을 눌러주세요.</span></p>
+<figure class="shot"><img src="images/steps/step2_pickup.jpg" alt="배달과 포장 선택 화면, 포장 버튼 강조"></figure>
 
 <h3>STEP 3. 픽업할 매장 선택</h3>
-<p>현재 위치 기준으로 가까운 매장이 떠요. 퇴근길 동선에 있는 매장을 고르면 더 편해요.</p>
-<div class="slot"><b>📸 매장 선택 화면</b></div>
+<p>내 위치 기준으로 가까운 매장이 떠요. 여기서 보면 <b>배달비 4,000원</b>이라고 적혀 있죠? 포장을 고르면 이 금액이 그대로 0원이 돼요. 퇴근길 동선에 있는 매장의 '포장'을 눌러주세요.</p>
+<figure class="shot"><img src="images/steps/step3_store.jpg" alt="주변 매장 찾기 화면, 포장 버튼 강조"></figure>
 
 <h3>STEP 4. 메뉴 담기</h3>
-<p>고민할 것도 없이 교촌의 근본, <b>허니콤보</b>로 골랐어요. 😋</p>
-<div class="slot"><b>📸 메뉴 선택 화면</b></div>
+<p>고민할 것도 없이 교촌의 근본, <b>허니콤보</b>로 골랐어요. 😋 가격은 23,000원! 수량 확인하고 '장바구니 담기'를 눌러주세요.</p>
+<figure class="shot"><img src="images/steps/step4_menu.jpg" alt="허니콤보 메뉴 상세, 23,000원"></figure>
 
-<h3>STEP 5. 결제 화면에서 10% 할인 쿠폰 적용 ✅</h3>
-<p>포장 주문을 하면 <b>포장 10% 할인 쿠폰이 자동으로 발급</b>돼요. 결제 화면에서 쿠폰만 적용하면 끝! 23,000원에서 <b>2,300원</b>이 빠져서 최종 <span class="hl">20,700원</span>에 결제했어요. 쿠폰은 주문 1건당 1장씩, 횟수 제한 없이 포장할 때마다 쓸 수 있어요.</p>
-<div class="slot"><b>📸 결제 화면</b>할인 금액 확대 + 빨간 박스</div>
+<h3>STEP 5. 결제할 때 '포장 10% 할인' 쿠폰 적용 ✅</h3>
+<p>결제 화면에서 쿠폰을 누르면 <b>'포장 10% 할인'</b> 쿠폰이 보여요. 체크하고 '선택적용'만 누르면 끝! 허니콤보 23,000원에서 <b>2,300원</b>이 빠져서 <span class="hl">20,700원</span>이 돼요.</p>
+<figure class="shot"><img src="images/steps/step5_coupon.jpg" alt="쿠폰 선택 화면, 포장 10% 할인 쿠폰 강조"></figure>
+<p class="note">※ 쿠폰 조건: 16,000원 이상 주문 시 사용 가능, 2026년 12월 31일까지. 단품 메뉴에만 적용되고 세트 메뉴는 제외돼요.</p>
 
-<h3>STEP 6. 픽업 시간 확인하고 출발!</h3>
-<p>주문 완료 후 예상 조리 시간이 안내돼요. 저는 약 [○○]분 뒤에 맞춰서 출발했어요.</p>
-<div class="slot"><b>📸 주문 완료 화면</b></div>
-
-<h2>🏃 매장 픽업 후기</h2>
-<p>[○○점]에 도착하니 주문 번호만 말하면 바로 받을 수 있게 준비돼 있었어요. 기다림 없이 <b>"교촌 포장이요~"</b> 한마디로 끝!</p>
-<div class="slot"><b>📸 매장 외관 / 픽업대</b></div>
-
-<h2>🍗 갓 튀긴 치킨은 차원이 다릅니다</h2>
-<p>집에 오자마자 바로 오픈! 박스를 여는 순간 달콤한 허니 향이 확 퍼지는데… 이게 바로 포장의 진짜 매력이더라고요.</p>
+<h2>🍗 교촌은 역시 허니콤보</h2>
 <figure><img src="images/chicken_web.jpg" alt="박스에 가득 담긴 교촌 허니콤보"><figcaption>박스 가득 허니콤보 🍯</figcaption></figure>
-<p><b>허니콤보</b>는 겉은 바삭하고, 달콤짭짤한 허니소스가 한 겹 한 겹 배어 있어서 한 입 베어 물면 <span class="hl">'바삭' 소리부터 다르게</span> 느껴졌어요. 배달로 받을 때보다 눅눅함이 훨씬 덜해서 마지막 한 조각까지 바삭함이 유지됐어요. 단짠 조합이라 콜라 한 모금이면 무한 루프… 🔁</p>
-<div class="slot"><b>📸 단면 / 소스 클로즈업</b></div>
-<div class="slot" style="margin-top:12px"><b>📸 먹는 장면 or 한 상 차림</b></div>
+<p>박스를 여는 순간 달콤한 허니 향이 확 퍼지는데, 이 맛에 교촌 먹는 거죠. <b>허니콤보</b>는 쫄깃한 날개와 담백한 다리 조합이라 부위 고민할 필요가 없어요.</p>
+<p>겉은 바삭하고, 달콤짭짤한 허니소스가 얇게 코팅돼 있어서 한 입 베어 물면 <span class="hl">'바삭' 소리부터 달라요.</span> 소스가 과하지 않아서 끝까지 물리지 않고, 단짠 조합이라 콜라 한 모금이면 무한 루프… 🔁 포장해서 갓 튀긴 걸 바로 먹으면 이 바삭함이 훨씬 오래가요.</p>
 
 <h2>🎬 글로 보기 귀찮다면? 30초 영상으로 끝내드림 👇</h2>
-<p>주문부터 픽업, 먹방까지 숏츠로도 담아봤어요! 영상으로 보면 바삭함이 더 실감나실 거예요 😆</p>
+<p>할인 받는 법부터 허니콤보까지 숏츠로도 담아봤어요! 영상으로 보면 바삭함이 더 실감나실 거예요 😆</p>
 <div class="slot"><b>🎬 인스타그램 릴스 링크 삽입</b></div>
 
 <h2>💡 알아두면 더 이득인 꿀팁</h2>
 <ul class="tips">
 <li><b>피크 시간(저녁 6~8시)엔 미리 주문!</b> 도착 시간에 맞춰 주문하면 대기 없이 바로 픽업 가능해요.</li>
 <li><b>퇴근길 동선에 있는 매장을 즐겨찾기</b>해두면 다음 주문이 훨씬 빨라져요.</li>
-<li><b>쿠폰은 횟수 제한 없음!</b> 포장할 때마다 자동 발급되니 결제 전에 적용만 잊지 마세요.</li>
+<li><b>16,000원 이상 단품 주문</b>이어야 쿠폰이 적용돼요. 세트 메뉴는 제외라 단품으로 담는 게 이득!</li>
+<li><b>결제 전 쿠폰 적용 필수!</b> 자동으로 빠지는 게 아니라 결제할 때 직접 선택해야 해요.</li>
 </ul>
 
 <h2>✍️ 총평</h2>
 <div class="tbl"><table>
 <tbody>
-<tr><td>가격 혜택</td><td>⭐⭐⭐⭐⭐ 배달팁 0원 + 10% 할인</td></tr>
+<tr><td>가격 혜택</td><td>⭐⭐⭐⭐⭐ 배달비 0원 + 10% 할인</td></tr>
 <tr><td>주문 편의성</td><td>⭐⭐⭐⭐⭐ 3분이면 끝</td></tr>
 <tr><td>맛</td><td>⭐⭐⭐⭐⭐ 갓 튀긴 바삭함 그대로</td></tr>
 <tr><td>재주문 의사</td><td>💯 무조건</td></tr>
 </tbody></table></div>
-<p>배달팁 아끼고, 할인 받고, 제일 맛있을 때 바로 먹을 수 있는 방법. 한 번 해보니까 왜 이제야 알았나 싶더라고요.</p>
+<p>배달비 아끼고, 할인 받고, 제일 맛있을 때 바로 먹을 수 있는 방법. 한 번 해보니까 왜 이제야 알았나 싶더라고요.</p>
 <p class="cta">오늘 저녁 치킨은, 배달 말고 포장으로 10% 아끼세요! 🍗</p>
 
 <section class="promo">
@@ -166,7 +158,7 @@ ul.tips li::before{content:"✔";position:absolute;left:0;color:var(--gold);font
 <p class="tags">#교촌치킨 #교촌포장할인 #교촌앱 #교촌치킨할인 #치킨포장할인 #치킨할인 #포장주문 #허니콤보 #교촌K스피커스 #K스피커스13기 #교촌서포터즈</p>
 </article>
 
-<p class="src toolbar">금액 출처: <a href="https://zdnet.co.kr/view/?no=20260203112434">교촌 포장 10% 할인(ZDNet, 2026.2)</a> · <a href="https://v.daum.net/v/20260409165437122">허니콤보 가격(2026.4)</a> · <a href="https://zdnet.co.kr/view/?no=20261020174452">K-스피커스 13기(ZDNet, 2026.10)</a></p>
+<p class="src toolbar">출처: 교촌앱 화면(2026.10) · <a href="https://zdnet.co.kr/view/?no=20260203112434">교촌 포장 10% 할인(ZDNet, 2026.2)</a> · <a href="https://zdnet.co.kr/view/?no=20261020174452">K-스피커스 13기(ZDNet, 2026.10)</a></p>
 
 <script>
 document.getElementById('copyBtn').addEventListener('click', async (e) => {
