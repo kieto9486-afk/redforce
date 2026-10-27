@@ -32,6 +32,7 @@ b,strong{font-weight:700}
 .red{color:var(--red)}
 figure{margin:22px 0}
 figure img{display:block;width:100%;max-width:100%;border-radius:8px}
+figure.reel video{display:block;width:min(100%,360px);aspect-ratio:9/16;margin:0 auto;border-radius:12px;background:#000}
 figure.shot img{width:min(100%,360px);margin:0 auto;border:1px solid var(--line)}
 figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:6px}
 .slot{border:2px dashed var(--line);background:var(--slot);border-radius:8px;padding:28px 16px;text-align:center;color:var(--muted);font-size:14px}
@@ -119,7 +120,7 @@ ul.tips li::before{content:"✔";position:absolute;left:0;color:var(--gold);font
 
 <h2>🎬 글로 보기 귀찮다면? 30초 영상으로 끝내드림 👇</h2>
 <p>할인 받는 법부터 허니콤보까지 숏츠로도 담아봤어요! 영상으로 보면 바삭함이 더 실감나실 거예요 😆</p>
-<div class="slot"><b>🎬 인스타그램 릴스 링크 삽입</b></div>
+<figure class="reel"><video src="images/kyochon_shorts_web.mp4" poster="images/shorts_poster.jpg" controls playsinline preload="metadata"></video><figcaption>📱 인스타그램 릴스: [릴스 링크 삽입]</figcaption></figure>
 
 <h2>💡 알아두면 더 이득인 꿀팁</h2>
 <ul class="tips">
