@@ -1,6 +1,6 @@
 # 07 한정선 찹쌀떡
 
-60초. 인기 숏폼 6개를 직접 분석해 짠 새 구성으로 만든 첫 편이에요.
+60초(v2 55.9초). 인기 숏폼 6개를 직접 분석해 짠 새 구성으로 만든 첫 편이에요.
 
 - 훅: "찹쌀떡 하나 사려고, 문 연 지 10분 만에 141팀이 줄을 섰습니다"
 - 줄 세우는 설계 3가지: 자르는 순간이 광고판 → 줄 자체가 사회적 증거 → 줄 못 서는 사람에겐 편의점(3,900원 × 60만 개 ≈ 23억 원, 단순 계산)
@@ -12,5 +12,12 @@
 
 캡션 요약: "찹쌀떡 하나 사려고 문 연 지 10분 만에 141팀이 줄을 섰어요 🍡" (전문은 `caption.md`)
 
+## v2 수정본 (2026-10-30)
+
+- `hanjeongseon_shorts_v2.mp4`: 상단 제목에 "한정선" 추가, 빈 엔드카드 삭제(60.2초 → 55.9초). **0~7.8초 내레이션 사실 오류가 남아 있어 아직 업로드 전**
+- `thumbnail_v2.png`: 딸기 단면 + "한정선 찹쌀떡" 커버
+- `caption.md`: v2 캡션으로 교체
+- 남은 작업과 정확한 수정값은 [`REVISION.md`](REVISION.md)
+
 ## 파일
-`hanjeongseon_shorts.mp4` · `caption.md` · `thumbnail.png`
+`hanjeongseon_shorts.mp4`(v1) · `hanjeongseon_shorts_v2.mp4` · `caption.md` · `thumbnail.png`(v1) · `thumbnail_v2.png` · `REVISION.md`
