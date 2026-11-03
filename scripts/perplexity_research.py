@@ -4,7 +4,7 @@
 사용법:
     export PERPLEXITY_API_KEY=pplx-...        # 키는 코드에 적지 말고 환경변수로!
     python3 scripts/perplexity_research.py "교촌치킨"
-    python3 scripts/perplexity_research.py "교촌치킨" --slug kyochon --model sonar-pro
+    python3 scripts/perplexity_research.py "교촌치킨" --slug kyochon --effort medium
 
 결과: research/<slug>.md  (자료수집 → SWOT → STP → 성장 방안 → 예상 결과 + 출처 목록)
 추가 설치 없이 파이썬 표준 라이브러리만 씁니다.
@@ -20,7 +20,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-API_URL = "https://api.perplexity.ai/chat/completions"
+API_URL = "https://api.perplexity.ai/v1/agent"  # 2026-09 Sonar Chat Completions 종료 → Agent API
 ROOT = Path(__file__).resolve().parent.parent
 
 SYSTEM_PROMPT = """너는 인스타그램 '기업분석 마케터' 계정의 리서처야.
@@ -56,14 +56,13 @@ def slugify(text: str) -> str:
     return slug or "company"
 
 
-def call_perplexity(api_key: str, company: str, model: str) -> dict:
+
+def call_perplexity(api_key: str, company: str, effort: str) -> dict:
     payload = {
-        "model": model,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": USER_PROMPT.format(company=company)},
-        ],
-        "temperature": 0.2,
+        "effort": effort,
+        "instructions": SYSTEM_PROMPT,
+        "input": USER_PROMPT.format(company=company),
+        "tools": [{"type": "web_search"}],
     }
     req = urllib.request.Request(
         API_URL,
@@ -76,41 +75,51 @@ def call_perplexity(api_key: str, company: str, model: str) -> dict:
         method="POST",
     )
     try:
-        with urllib.request.urlopen(req, timeout=180) as resp:
+        with urllib.request.urlopen(req, timeout=600) as resp:
             return json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
         body = e.read().decode("utf-8", errors="replace")[:500]
-        hints = {
-            401: "API 키가 없거나 틀렸어요. 내 컴퓨터라면 PERPLEXITY_API_KEY를 설정하고, "
-            "클라우드라면 시크릿(api.perplexity.ai, Bearer)을 등록한 뒤 새 세션에서 실행하세요.",
-            402: "크레딧이 부족해요. Perplexity 설정 > API에서 결제 수단/크레딧을 확인하세요.",
-            400: "요청 형식 오류예요. --model 이름(sonar, sonar-pro 등)을 확인하세요.",
-            429: "요청이 너무 많아요. 잠시 후 다시 시도하세요.",
-        }
-        sys.exit(f"[오류] HTTP {e.code}: {hints.get(e.code, '응답 내용을 확인하세요.')}\n{body}")
+        if "paid credit" in body:
+            hint = "유료 크레딧이 필요해요. console.perplexity.ai에서 크레딧을 충전하세요."
+        else:
+            hint = {
+                401: "API 키가 없거나 틀렸어요. 내 컴퓨터라면 PERPLEXITY_API_KEY를 설정하고, "
+                "클라우드라면 시크릿(api.perplexity.ai, Bearer)을 등록한 뒤 새 세션에서 실행하세요.",
+                402: "크레딧이 부족해요. console.perplexity.ai에서 크레딧을 충전하세요.",
+                400: "요청 형식 오류예요. --effort 값(fast, low, medium, high, xhigh)을 확인하세요.",
+                429: "요청이 너무 많아요. 잠시 후 다시 시도하세요.",
+            }.get(e.code, "응답 내용을 확인하세요.")
+        sys.exit(f"[오류] HTTP {e.code}: {hint}\n{body}")
     except urllib.error.URLError as e:
         sys.exit(f"[오류] 네트워크 연결 실패: {e.reason}")
 
 
-def build_markdown(company: str, model: str, data: dict) -> str:
-    content = data["choices"][0]["message"]["content"]
-    # 최신 응답은 search_results(제목+URL), 예전 응답은 citations(URL만)
-    sources = data.get("search_results") or [{"url": u} for u in data.get("citations", [])]
+def build_markdown(company: str, effort: str, data: dict) -> str:
+    # Agent API 응답: output[] 안에 message(본문)와 search_results(출처)가 섞여 있어요.
+    texts, sources = [], []
+    for item in data.get("output", []):
+        if item.get("type") == "message":
+            texts += [c.get("text", "") for c in item.get("content", []) if c.get("type") == "output_text"]
+        elif item.get("type") == "search_results":
+            sources += item.get("results", [])
+    content = "\n".join(t for t in texts if t).strip() or "(응답에 본문이 없었어요)"
+    sources.sort(key=lambda r: r.get("id", 0))
 
     lines = [
         f"# {company} 기업분석 초안",
         "",
-        f"- 생성: {dt.date.today().isoformat()} · Perplexity `{model}`",
+        f"- 생성: {dt.date.today().isoformat()} · Perplexity Agent API (effort `{effort}`)",
         "- AI가 모은 초안이에요. 영상에 쓰기 전에 숫자는 출처 링크로 꼭 다시 확인하세요.",
         "",
-        content.strip(),
+        content,
         "",
         "## 출처",
     ]
     for i, s in enumerate(sources, 1):
+        num = s.get("id", i)  # 본문의 [n] 번호와 맞춰요
         title = s.get("title") or s["url"]
         date = f" ({s['date']})" if s.get("date") else ""
-        lines.append(f"{i}. [{title}]({s['url']}){date}")
+        lines.append(f"{num}. [{title}]({s['url']}){date}")
     if not sources:
         lines.append("- (응답에 출처가 없었어요)")
     return "\n".join(lines) + "\n"
@@ -120,7 +129,8 @@ def main() -> None:
     p = argparse.ArgumentParser(description="퍼플렉시티로 기업분석 초안 만들기")
     p.add_argument("company", help="분석할 기업 이름 (예: 교촌치킨)")
     p.add_argument("--slug", help="파일 이름 (기본: 기업 이름에서 자동 생성)")
-    p.add_argument("--model", default="sonar", help="sonar(저렴·빠름) 또는 sonar-pro(더 깊게)")
+    p.add_argument("--effort", default="fast", choices=["fast", "low", "medium", "high", "xhigh"],
+                   help="검색 깊이: fast(저렴·빠름) … high/xhigh(깊은 리서치, 비용↑)")
     p.add_argument("--out-dir", default=str(ROOT / "research"), help="저장 폴더")
     args = p.parse_args()
 
@@ -131,18 +141,16 @@ def main() -> None:
         api_key = "pplx-proxy-injected"
         print("PERPLEXITY_API_KEY가 없어 클라우드 시크릿(프록시 주입) 방식으로 요청해요.")
 
-    print(f"'{args.company}' 자료 수집 중… (모델: {args.model}, 30초~1분 걸려요)")
-    data = call_perplexity(api_key, args.company, args.model)
+    print(f"'{args.company}' 자료 수집 중… (effort: {args.effort}, 30초~몇 분 걸려요)")
+    data = call_perplexity(api_key, args.company, args.effort)
 
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / f"{args.slug or slugify(args.company)}.md"
-    out_path.write_text(build_markdown(args.company, args.model, data), encoding="utf-8")
-
-    usage = data.get("usage", {})
+    out_path.write_text(build_markdown(args.company, args.effort, data), encoding="utf-8")
     print(f"완료: {out_path}")
-    if usage:
-        print(f"토큰 사용량: 입력 {usage.get('prompt_tokens')} / 출력 {usage.get('completion_tokens')}")
+    if data.get("usage"):
+        print(f"사용량: {data['usage']}")
 
 
 if __name__ == "__main__":

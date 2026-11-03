@@ -14,4 +14,4 @@ export PERPLEXITY_API_KEY=pplx-...   # 키는 절대 코드나 커밋에 넣지 
 python3 scripts/perplexity_research.py "교촌치킨"
 ```
 
-- `--model sonar-pro`: 더 깊게 찾음(비용↑), `--slug kyochon`: 파일 이름 지정
+- `--effort high`: 더 깊게 찾음(비용↑, 기본은 `fast`), `--slug kyochon`: 파일 이름 지정
