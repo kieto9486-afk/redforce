@@ -81,7 +81,8 @@ def call_perplexity(api_key: str, company: str, model: str) -> dict:
     except urllib.error.HTTPError as e:
         body = e.read().decode("utf-8", errors="replace")[:500]
         hints = {
-            401: "API 키가 틀렸거나 만료됐어요. 키 앞뒤 공백/따옴표, 'pplx-'로 시작하는지 확인하세요.",
+            401: "API 키가 없거나 틀렸어요. 내 컴퓨터라면 PERPLEXITY_API_KEY를 설정하고, "
+            "클라우드라면 시크릿(api.perplexity.ai, Bearer)을 등록한 뒤 새 세션에서 실행하세요.",
             402: "크레딧이 부족해요. Perplexity 설정 > API에서 결제 수단/크레딧을 확인하세요.",
             400: "요청 형식 오류예요. --model 이름(sonar, sonar-pro 등)을 확인하세요.",
             429: "요청이 너무 많아요. 잠시 후 다시 시도하세요.",
@@ -125,11 +126,10 @@ def main() -> None:
 
     api_key = os.environ.get("PERPLEXITY_API_KEY", "").strip().strip('"').strip("'")
     if not api_key:
-        sys.exit(
-            "[오류] PERPLEXITY_API_KEY 환경변수가 없어요.\n"
-            "  - 내 컴퓨터: export PERPLEXITY_API_KEY=pplx-...  (Windows: set PERPLEXITY_API_KEY=pplx-...)\n"
-            "  - Claude Code 클라우드: 환경 설정 > Edit > 환경변수에 추가 후 새 세션 시작"
-        )
+        # Claude Code 클라우드에서 '시크릿 추가'(api.perplexity.ai, Bearer)로 등록했다면
+        # 프록시가 진짜 키로 바꿔 넣어 주므로 자리표시용 값만 보내면 돼요.
+        api_key = "pplx-proxy-injected"
+        print("PERPLEXITY_API_KEY가 없어 클라우드 시크릿(프록시 주입) 방식으로 요청해요.")
 
     print(f"'{args.company}' 자료 수집 중… (모델: {args.model}, 30초~1분 걸려요)")
     data = call_perplexity(api_key, args.company, args.model)
